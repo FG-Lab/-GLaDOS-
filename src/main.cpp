@@ -1,7 +1,15 @@
 #include <Arduino.h>
+#include <Gldr.h>
 
 
 #define STANDART_BAUDRATE 9600
+
+
+using namespace gldr;
+
+
+auto joystick = JoystickReceiver();
+auto remote   = RemoteReceiver(2, 3, joystick); 
 
 
 void setup()
@@ -12,6 +20,7 @@ void setup()
 
 void loop()
 {
-    Serial.println("Hi, bis in einer Sekunde");
-    delay(1000);
+    remote.update();
+    Serial.print("Y-Axis: ");
+    Serial.println(joystick.getY());
 }
